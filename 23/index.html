@@ -1,0 +1,558 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#c22b9d">
+<title>Feliz Cumpleaños Nicole 🎁</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --rosa: #f080b5;
+    --fucsia: #ed00dc;
+    --morado: #8500a5;
+    --amarillo: #ffe8a3;
+    --texto: #743c60;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    font-family: Georgia, serif;
+    color: var(--texto);
+    background: linear-gradient(
+        115deg,
+        #bc0f88 0%,
+        #ce52b2 43%,
+        #e5a9e0 76%,
+        #f0cef4 100%
+    );
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+
+button {
+    border: none;
+    border-radius: 30px;
+    padding: 14px 23px;
+    min-height: 48px;
+    background: var(--fucsia);
+    color: white;
+    font-family: inherit;
+    font-size: 15px;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: transform .2s, filter .2s;
+}
+
+button:hover {
+    filter: brightness(1.06);
+    transform: scale(1.04);
+}
+
+button:active {
+    transform: scale(.97);
+}
+
+button:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 3px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+main {
+    width: min(100% - 30px, 650px);
+    margin: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 30px 0 45px;
+    text-align: center;
+}
+
+h1 {
+    margin: 24px 0 0;
+    font-size: clamp(27px, 6vw, 38px);
+    line-height: 1.25;
+}
+
+.subtitle {
+    margin: 25px auto 0;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.cake {
+    font-size: 38px;
+    line-height: 1;
+    margin-top: 3px;
+}
+
+.gift {
+    position: relative;
+    width: 210px;
+    height: 200px;
+    margin: 120px auto 30px;
+}
+
+.box {
+    position: absolute;
+    left: 10px;
+    bottom: 0;
+    width: 190px;
+    height: 122px;
+    background: var(--morado);
+    border: 3px solid #a94c91;
+    border-radius: 0 0 13px 13px;
+}
+
+.box::before {
+    content: "";
+    position: absolute;
+    left: 75px;
+    top: 0;
+    width: 32px;
+    height: 100%;
+    background: var(--amarillo);
+}
+
+.lid {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 38px;
+    width: 210px;
+    height: 43px;
+    background: var(--rosa);
+    border: 3px solid #b95891;
+    border-radius: 8px;
+    transform-origin: 12% 100%;
+    transition: transform 1s ease;
+}
+
+.lid::before {
+    content: "";
+    position: absolute;
+    left: 77px;
+    top: 0;
+    width: 32px;
+    height: 100%;
+    background: var(--amarillo);
+}
+
+.bow {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 76px;
+    font-size: 43px;
+    line-height: 1;
+    filter: drop-shadow(1px 2px 0 #68244b);
+    transition: transform 1s ease;
+}
+
+.gift.open .lid {
+    transform: translate(-28px, -72px) rotate(-28deg);
+}
+
+.gift.open .bow {
+    transform: translate(-28px, -68px) rotate(-25deg);
+}
+
+.photo-frame {
+    width: min(100%, 400px);
+    margin: 25px auto 15px;
+    padding: 10px 10px 18px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 8px 25px #713d5525;
+    transform: rotate(-1deg);
+}
+
+.photo {
+    display: block;
+    width: 100%;
+    height: min(53vh, 430px);
+    height: min(53dvh, 430px);
+    min-height: 200px;
+    object-fit: contain;
+    background: #fffafd;
+}
+
+.caption {
+    min-height: 48px;
+    line-height: 1.7;
+}
+
+.counter {
+    font-size: 14px;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.fade {
+    animation: appear .5s ease;
+}
+
+.letter {
+    margin: 25px auto;
+    padding: clamp(20px, 6vw, 35px);
+    background: #fffaf1;
+    border-radius: 9px;
+    box-shadow: 0 8px 30px #713d5525;
+    text-align: left;
+    line-height: 1.85;
+    overflow-wrap: anywhere;
+    animation: appear .7s ease;
+}
+
+.letter h2 {
+    text-align: center;
+    line-height: 1.4;
+}
+
+.signature {
+    text-align: right;
+    font-style: italic;
+    margin-top: 30px;
+}
+
+.heart {
+    text-align: center;
+    color: #e879ad;
+    font-size: 30px;
+}
+
+.music-control {
+    position: fixed;
+    z-index: 10;
+    top: max(12px, env(safe-area-inset-top));
+    right: 12px;
+}
+
+.music-control button {
+    background: #8500a5;
+    box-shadow: 0 3px 12px #63205235;
+    font-size: 13px;
+    padding: 11px 15px;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 420px) {
+    main {
+        padding-top: 45px;
+    }
+
+    .subtitle {
+        max-width: 310px;
+    }
+
+    .gift {
+        margin-top: 95px;
+    }
+
+    .controls button {
+        padding: 12px 17px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="musicaFondo" loop preload="auto">
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<div class="music-control">
+    <button id="botonMusica"
+            type="button"
+            onclick="alternarMusica()"
+            aria-pressed="false">
+        🎵 Activar música
+    </button>
+</div>
+
+<main>
+
+    <section id="intro">
+        <h1>Feliz Cumpleaños Nicole</h1>
+        <div class="cake">🎂</div>
+
+        <p class="subtitle">
+            Te preparé un detallito, ábrelo o desaparece jsjsjs
+        </p>
+
+        <div class="gift" id="gift" aria-hidden="true">
+            <div class="box"></div>
+            <div class="lid"></div>
+            <div class="bow">🎀</div>
+        </div>
+
+        <button id="openBtn" type="button" onclick="openGift()">
+            Abrir mi regalo 🎁
+        </button>
+    </section>
+
+    <section id="gallery" class="hidden">
+        <h1>Nuestros recuerdos 💗</h1>
+        <p>Un pequeño recuerdo para alguien especial.</p>
+
+        <div class="photo-frame">
+            <img id="photo"
+                 class="photo"
+                 src="foto1.jpg"
+                 alt="Fotografía especial">
+        </div>
+
+        <p id="caption" class="caption"></p>
+        <p id="counter" class="counter"></p>
+
+        <div class="controls">
+            <button id="prevBtn" onclick="changePhoto(-1)">
+                ← Anterior
+            </button>
+
+            <button id="nextBtn" onclick="changePhoto(1)">
+                Siguiente →
+            </button>
+        </div>
+
+        <div class="controls">
+            <button id="letterBtn"
+                    class="hidden"
+                    onclick="showLetter()">
+                Abrir carta 💌
+            </button>
+        </div>
+    </section>
+
+    <!-- Carta -->
+    <section id="final" class="hidden">
+        <h1>Una última sorpresa 💌</h1>
+
+        <article class="letter">
+            <h2>Hola, quería decirte unas palabritas c:</h2>
+
+            <p>
+                Hoy es un día especial y quería innnovar un poco, 
+                estuve buscando guías y leyendo varias bibliotecas 
+                para hacerlo bien jsjsjs.
+            </p>
+
+            <p>
+                Quería desearte un feliz cumpleaños, 
+                un día tan especial como el que es hoy, 
+                para una persona especial se merece algo especial, 
+                te doy mi cariño, mi tiempo, mi dedicación, 
+                mi esfuerzo y mi sinceridad. 
+                Te doy el día de hoy algo que no puedo darte 
+                porque no estás a mi lado pero que pronto lo estarás.
+            </p>
+
+            <p>
+                Espero que estas fotos te hayan gustado, 
+                recordando algunas de las salidas que hemos tenido, 
+                de los momentos juntos y de un detalle tan hermoso que 
+                simboliza la unión entre tú y yo.
+            </p>
+
+            <p>
+               Estoy seguro de que todavía nos quedan muchos recuerdos bonitos, 
+               vamos a por ellos y bueno, seguramente cuando vengas 
+               formaremos más. Te deseo un feliz cumpleaños Nicole, 
+               te quiero mucho y te agradezco por formar parte de mi vida 
+               y hacerla tan única.
+            </p>
+
+            <p>
+                Te estaré esperando con ansias para poder abrazarte y tenerte conmigo c:
+            </p>
+
+            <p class="signature">
+                Con mucho cariño,<br>
+                De parte de Adrián Pinto. 💗
+            </p>
+
+            <div class="heart">♡</div>
+        </article>
+
+        <button onclick="restart()">
+            Volver a ver el regalo ↻
+        </button>
+    </section>
+
+</main>
+
+<script>
+/* Fotos y Mensajitos */
+const photos = [
+    {
+        src: "foto1.jpg",
+        caption: "Desde la primera cita que tuvimos en el año."
+    },
+    {
+        src: "foto2.jpg",
+        caption: "Hasta la última de momento 🤞"
+    },
+    {
+        src: "foto3.jpg",
+        caption: "Que vengan muchos recuerdos más..."
+    },
+
+    {
+        src: "foto4.jpg",
+        caption: "Gracias por aparecer en mi vida :') "
+    },
+    {
+    src: "foto5.jpg",
+    caption: "Le deseo un bonito día a la mujer más hermosa que conozco ✨🤞"
+}
+];
+
+let currentPhoto = 0;
+
+const $ = id => document.getElementById(id);
+const musica = $("musicaFondo");
+const botonMusica = $("botonMusica");
+
+/* Música */
+
+async function activarMusica() {
+    try {
+        await musica.play();
+        botonMusica.textContent = "🔊 Pausar música";
+        botonMusica.setAttribute("aria-pressed", "true");
+    } catch (error) {
+        botonMusica.textContent = "🎵 Activar música";
+    }
+}
+
+function alternarMusica() {
+    if (musica.paused) {
+        activarMusica();
+    } else {
+        musica.pause();
+        botonMusica.textContent = "🎵 Activar música";
+        botonMusica.setAttribute("aria-pressed", "false");
+    }
+}
+
+function openGift() {
+    // Para la muúsica
+    activarMusica();
+
+    $("gift").classList.add("open");
+    $("openBtn").disabled = true;
+
+    setTimeout(() => {
+        $("intro").classList.add("hidden");
+        $("gallery").classList.remove("hidden");
+
+        renderPhoto();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 950);
+}
+
+function renderPhoto() {
+    const item = photos[currentPhoto];
+    const photo = $("photo");
+
+    photo.classList.remove("fade");
+    photo.src = item.src;
+    photo.alt = item.caption;
+
+    void photo.offsetWidth;
+    photo.classList.add("fade");
+
+    $("caption").textContent = item.caption;
+    $("counter").textContent =
+        `Fotografía ${currentPhoto + 1} de ${photos.length}`;
+
+    $("prevBtn").classList.toggle(
+        "hidden", currentPhoto === 0
+    );
+
+    $("nextBtn").classList.toggle(
+        "hidden", currentPhoto === photos.length - 1
+    );
+
+    $("letterBtn").classList.toggle(
+        "hidden", currentPhoto !== photos.length - 1
+    );
+}
+
+function changePhoto(direction) {
+    const next = currentPhoto + direction;
+
+    if (next < 0 || next >= photos.length) return;
+
+    currentPhoto = next;
+    renderPhoto();
+}
+
+/* Carta */
+
+function showLetter() {
+    $("gallery").classList.add("hidden");
+    $("final").classList.remove("hidden");
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+
+function restart() {
+    currentPhoto = 0;
+
+    $("final").classList.add("hidden");
+    $("gallery").classList.add("hidden");
+    $("intro").classList.remove("hidden");
+
+    $("gift").classList.remove("open");
+    $("openBtn").disabled = false;
+
+    
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+
+$("photo").addEventListener("error", () => {
+    $("caption").textContent =
+        "No se pudo cargar la foto. Revisa su nombre y ubicación.";
+});
+</script>
+
+</body>
+</html>
